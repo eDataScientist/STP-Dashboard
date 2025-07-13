@@ -1,0 +1,436 @@
+---
+alwaysApply: true
+---
+# FIGS Claims Interpreter - Autonomous AI Development Protocol
+
+**CRITICAL:** This document contains MANDATORY rules for autonomous AI agents developing this project. **FOLLOW EVERY RULE EXACTLY.**
+
+---
+
+## 🔒 MANDATORY PROTOCOL RULES
+
+### RULE 1: DOCUMENTATION CONSULTATION (REQUIRED BEFORE EVERY TASK)
+```
+BEFORE starting ANY task, you MUST:
+1. Read docs/srs.md (Software Requirements Specification) completely
+2. Read docs/blueprint.md (Software Blueprint) completely  
+3. Read docs/content-specification.md (Content Strategy & Information Architecture) completely
+4. Read docs/developer-checklist.md (Developer Checklist) completely
+5. Locate the specific task in the Developer Checklist
+6. Understand the task's dependencies and requirements
+7. Confirm you understand what "done" means for this task
+
+DOCUMENTATION FILE STRUCTURE:
+docs/
+├── srs.md                    # Software Requirements Specification
+├── blueprint.md              # Software Blueprint & Implementation Guide  
+├── content-specification.md       # Content Strategy & Information Architecture
+├── developer-checklist.md    # Developer Checklist (THIS FILE GETS UPDATED)
+└── autonomous-protocol.md    # This protocol document
+
+IF you cannot access or understand ANY documentation, STOP and report the issue.
+```
+
+### RULE 2: SINGLE TASK EXECUTION (ABSOLUTE REQUIREMENT)
+```
+YOU MUST ONLY WORK ON ONE TASK AT A TIME:
+1. Select the next uncompleted task from the Developer Checklist
+2. Complete that task entirely before moving to any other task
+3. Do NOT start multiple tasks simultaneously
+4. Do NOT skip tasks unless explicitly marked as dependencies
+
+VIOLATION OF THIS RULE STOPS ALL DEVELOPMENT.
+```
+
+### RULE 3: DEPENDENCY VERIFICATION (MANDATORY BEFORE EACH TASK)
+```
+BEFORE starting any task, you MUST:
+1. Check the task's listed dependencies in the Developer Checklist
+2. Verify ALL dependency tasks are marked as completed (✅)
+3. If ANY dependency is incomplete, STOP and complete dependencies first
+4. Document which dependencies you verified
+
+EXAMPLE:
+Task P0-003 depends on P0-002
+- ✅ Check: Is P0-002 marked complete? 
+- ✅ If YES, proceed with P0-003
+- ❌ If NO, complete P0-002 first
+```
+
+### RULE 4: TASK COMPLETION VERIFICATION (REQUIRED FOR EVERY TASK)
+```
+After completing each task, you MUST verify ALL completion criteria:
+
+1. Code is written and tested locally ✅/❌
+2. TypeScript compilation passes with no errors ✅/❌  
+3. ESLint and Prettier checks pass ✅/❌
+4. Component renders without console errors ✅/❌
+5. Basic functionality works as specified ✅/❌
+6. Code is committed to version control ✅/❌
+
+ALL criteria must be ✅ before marking task complete.
+```
+
+### RULE 5: TASK MARKING PROTOCOL (MANDATORY)
+```
+When a task is completed, you MUST:
+1. Update the docs/developer-checklist.md file
+2. Change [ ] to [✅] for the completed task
+3. Update the progress counter for that phase
+4. Add completion timestamp in format: [✅ YYYY-MM-DD HH:MM]
+5. Commit the updated checklist to version control
+
+EXAMPLE:
+- [✅ 2025-07-13 14:30] **P0-001** Initialize Next.js 14 project with TypeScript
+```
+
+### RULE 6: COMMIT PROTOCOL (MANDATORY)
+```
+You MUST commit to version control:
+1. After completing EVERY individual task
+2. After completing each PHASE entirely
+3. Before moving to the next phase
+4. When encountering any blocking issues
+
+COMMIT MESSAGE FORMAT:
+"feat: [TASK-ID] - [Brief description]
+
+- Completed task: [Task Name]
+- Phase: [Phase Number]
+- Dependencies verified: [List]
+- All completion criteria met: ✅
+
+[Additional details if needed]"
+
+EXAMPLE:
+"feat: P0-001 - Initialize Next.js project
+
+- Completed task: Initialize Next.js 14 project with TypeScript  
+- Phase: 1
+- Dependencies verified: None (first task)
+- All completion criteria met: ✅
+
+Project structure created, TypeScript configured, dev server verified working."
+```
+
+### RULE 7: ERROR HANDLING PROTOCOL (MANDATORY)
+```
+When encountering ANY error or blocker:
+1. STOP all development immediately
+2. Document the exact error message
+3. Document what you were attempting to do
+4. Document which task you were working on
+5. Commit current progress with error details
+6. Create an issue report with full context
+7. DO NOT attempt to skip or work around errors
+
+ERROR COMMIT FORMAT:
+"error: [TASK-ID] - [Error description]
+
+- Task attempted: [Task Name]
+- Error encountered: [Exact error message]
+- Steps taken: [What you tried]
+- Current status: Blocked
+- Next action required: [What needs to be resolved]"
+```
+
+---
+
+## 📋 STEP-BY-STEP EXECUTION PROTOCOL
+
+### BEFORE STARTING ANY WORK
+```
+STEP 1: Environment Setup
+1. Clone the repository
+2. Verify you can access all documentation files in docs/ folder:
+   - docs/srs.md (Software Requirements Specification)
+   - docs/blueprint.md (Software Blueprint)
+   - docs/content-specification.md (Content Strategy & Information Architecture)
+   - docs/developer-checklist.md (Developer Checklist)
+   - docs/autonomous-protocol.md (This protocol document)
+3. Confirm you understand the project structure
+4. Verify development environment setup
+
+STEP 2: Initial Documentation Review  
+1. Read docs/srs.md completely - understand ALL requirements
+2. Read docs/blueprint.md completely - understand architecture  
+3. Read docs/content-specification.md - understand all page content
+4. Study docs/developer-checklist.md - understand task flow
+5. Identify the first uncompleted task
+
+STEP 3: First Task Verification
+1. Confirm P0-001 is the first task to complete
+2. Verify P0-001 has no dependencies (it's the first task)
+3. Read P0-001 task description thoroughly
+4. Understand what "done" means for P0-001
+```
+
+### FOR EVERY TASK EXECUTION
+```
+STEP 1: Pre-Task Checklist
+□ Documentation reviewed for this task
+□ Dependencies checked and confirmed complete  
+□ Task requirements understood completely
+□ Development environment ready
+□ Previous tasks verified as complete
+
+STEP 2: Task Execution
+□ Start working on ONLY this single task
+□ Follow the task description exactly
+□ Reference docs/srs.md and docs/blueprint.md as needed for details
+□ Test functionality as you develop
+□ Do NOT start any other tasks
+
+STEP 3: Completion Verification
+□ Code written and tested locally
+□ TypeScript compilation passes (no errors)
+□ ESLint and Prettier checks pass
+□ Component renders without console errors  
+□ Basic functionality works as specified
+□ Code committed to version control
+
+STEP 4: Task Marking and Progress Update
+□ Update Developer Checklist markdown
+□ Mark task as complete: [✅ YYYY-MM-DD HH:MM]
+□ Update phase progress counter
+□ Commit checklist updates
+□ Verify commit successful
+
+STEP 5: Next Task Preparation
+□ Identify next uncompleted task
+□ Check that task's dependencies
+□ Verify all dependencies are complete
+□ If dependencies incomplete, work on those first
+□ If dependencies complete, proceed to next task
+```
+
+### PHASE COMPLETION PROTOCOL
+```
+When ALL tasks in a phase are complete:
+
+STEP 1: Phase Verification
+□ Every task in the phase marked ✅
+□ Phase progress shows 100% complete
+□ All commits for the phase successful
+□ No outstanding errors or issues
+
+STEP 2: Phase Commit
+□ Create comprehensive phase completion commit
+□ Use commit format: "feat: Phase [X] Complete - [Phase Name]"
+□ Include summary of all completed tasks
+□ Document any issues encountered and resolved
+
+STEP 3: Next Phase Preparation  
+□ Review documentation for next phase
+□ Understand next phase objectives
+□ Identify first task of next phase
+□ Verify you're ready to proceed
+
+EXAMPLE PHASE COMPLETION COMMIT:
+"feat: Phase 1 Complete - Foundation & Data Layer
+
+- All 19 tasks completed successfully
+- Project setup and infrastructure complete
+- Type definitions implemented  
+- State management configured
+- File processing utilities created
+- Error handling framework established
+
+Ready to proceed to Phase 2: Core Visualization"
+```
+
+---
+
+## 🚨 CRITICAL FAILURE CONDITIONS
+
+### IMMEDIATE STOP CONDITIONS
+If ANY of these occur, STOP ALL WORK immediately:
+
+```
+1. Cannot access or understand documentation
+2. Dependency task is not actually complete
+3. TypeScript compilation fails and cannot be resolved
+4. Task requirements are ambiguous or contradictory
+5. Previous task completion was incorrectly marked
+6. Development environment is not working properly
+7. Unable to commit to version control
+```
+
+### RECOVERY PROTOCOL
+```
+When a stop condition occurs:
+
+1. STOP all development work
+2. Document the exact issue encountered
+3. Create detailed error report with:
+   - What task you were attempting
+   - What went wrong
+   - Current state of the project
+   - What needs to be resolved to continue
+4. Commit current progress with error documentation
+5. Wait for manual intervention to resolve the issue
+```
+
+---
+
+## 🔍 QUALITY ASSURANCE CHECKS
+
+### BEFORE MARKING ANY TASK COMPLETE
+```
+RUN THESE CHECKS (ALL MUST PASS):
+
+Technical Checks:
+□ npm run build - No errors
+□ npm run lint - No errors  
+□ npm run type-check - No errors
+□ All new files have proper imports
+□ No console.error() in browser console
+□ Component renders without crashing
+
+Functional Checks:
+□ Feature works as described in task
+□ Matches requirements in docs/srs.md
+□ Follows patterns in docs/blueprint.md
+□ Uses content from docs/content-specification.md
+□ No broken functionality introduced
+
+Documentation Checks:
+□ Code includes necessary comments
+□ Complex logic is explained
+□ Component props documented if applicable
+□ File follows established patterns
+```
+
+### PHASE QUALITY GATE
+```
+BEFORE completing any phase:
+
+□ All tasks in phase completed
+□ All quality checks passed for every task
+□ Phase functionality tested end-to-end  
+□ No regression in previous functionality
+□ Documentation reflects current state
+□ Commit history is clean and complete
+```
+
+---
+
+## 📝 REQUIRED DOCUMENTATION UPDATES
+
+### AFTER EVERY TASK
+```
+MUST UPDATE:
+1. docs/developer-checklist.md (mark task complete)
+2. Git commit history (with proper commit message)
+3. Any inline code comments (if complex logic added)
+```
+
+### AFTER EVERY PHASE
+```
+MUST UPDATE:
+1. docs/developer-checklist.md (phase completion summary)
+2. Git commit history (phase completion commit)
+3. README.md (if setup instructions change)
+4. Any discovered issues or deviations from plan
+```
+
+---
+
+## 🎯 SUCCESS METRICS
+
+### TASK-LEVEL SUCCESS
+```
+A task is successful when:
+✅ All completion criteria met
+✅ Code committed successfully  
+✅ Next task dependencies satisfied
+✅ No regressions introduced
+✅ Documentation updated correctly
+```
+
+### PHASE-LEVEL SUCCESS
+```
+A phase is successful when:
+✅ All tasks in phase completed
+✅ Phase functionality works end-to-end
+✅ Quality gates passed
+✅ Clean commit history maintained
+✅ Ready to start next phase
+```
+
+### PROJECT-LEVEL SUCCESS
+```
+The project is successful when:
+✅ All 4 phases completed
+✅ All 78 tasks marked complete
+✅ Application works as specified in SRS
+✅ No critical bugs or issues
+✅ Clean, deployable codebase
+```
+
+---
+
+## ⚠️ WARNINGS AND REMINDERS
+
+```
+DO NOT:
+❌ Skip tasks or mark them complete without doing the work
+❌ Work on multiple tasks simultaneously
+❌ Ignore dependency requirements
+❌ Skip documentation review
+❌ Commit broken or untested code
+❌ Continue working when encountering errors
+❌ Make assumptions about requirements
+
+ALWAYS:
+✅ Read documentation before starting each task
+✅ Verify dependencies before starting tasks
+✅ Test your work before marking complete
+✅ Commit regularly with good messages
+✅ Update progress tracking accurately
+✅ Stop and ask for help when stuck
+✅ Follow the protocol exactly as written
+```
+
+---
+
+## 🚀 STARTING INSTRUCTIONS
+
+### TO BEGIN DEVELOPMENT:
+```
+1. Read this entire protocol document (docs/autonomous-protocol.md)
+2. Confirm you understand all rules and requirements  
+3. Set up development environment
+4. Access all documentation files in docs/ folder
+5. Begin with task P0-001 from docs/developer-checklist.md
+6. Follow the step-by-step execution protocol
+7. Do not deviate from these instructions
+
+EXPECTED PROJECT STRUCTURE:
+project-root/
+├── docs/                          # Documentation folder (you access these)
+│   ├── srs.md
+│   ├── blueprint.md
+│   ├── content-specification.md
+│   ├── developer-checklist.md     # YOU UPDATE THIS FILE
+│   └── autonomous-protocol.md
+├── src/                           # Source code (you create this)
+├── public/                        # Static assets (you create this)
+├── package.json                   # Dependencies (you create this)
+├── next.config.js                 # Next.js config (you create this)
+├── tailwind.config.js             # Tailwind config (you create this)
+├── tsconfig.json                  # TypeScript config (you create this)
+└── README.md                      # Project readme (you update this)
+
+FIRST COMMIT MESSAGE:
+"init: Development started following autonomous AI protocol
+
+- Protocol document reviewed and understood (docs/autonomous-protocol.md)
+- Documentation accessed and reviewed (docs/ folder)
+- Development environment configured
+- Ready to begin task P0-001
+
+Following autonomous AI development protocol v1.0"
+```
+
+**THIS PROTOCOL IS MANDATORY. DEVIATION FROM THESE RULES WILL RESULT IN PROJECT FAILURE.**
