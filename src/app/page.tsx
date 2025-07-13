@@ -1,4 +1,12 @@
 import Link from 'next/link'
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardHeader,
+  CardTitle,
+} from '@/components/ui/card'
+import { Button } from '@/components/ui/button'
 
 export default function HomePage() {
   return (
@@ -19,32 +27,43 @@ export default function HomePage() {
 
           <div className='mb-12'>
             <div className='grid grid-cols-1 md:grid-cols-3 gap-6 mb-8'>
-              <div className='p-6 border rounded-lg'>
-                <h3 className='font-semibold text-lg mb-2'>1. Upload</h3>
-                <p className='text-muted-foreground'>
-                  Upload your claims data CSV file
-                </p>
-              </div>
-              <div className='p-6 border rounded-lg'>
-                <h3 className='font-semibold text-lg mb-2'>2. Configure</h3>
-                <p className='text-muted-foreground'>
-                  Set up data schema and FIGS tree structure
-                </p>
-              </div>
-              <div className='p-6 border rounded-lg'>
-                <h3 className='font-semibold text-lg mb-2'>3. Analyze</h3>
-                <p className='text-muted-foreground'>
-                  Explore interactive visualizations
-                </p>
-              </div>
+              <Card>
+                <CardHeader>
+                  <CardTitle>1. Upload</CardTitle>
+                </CardHeader>
+                <CardContent>
+                  <CardDescription>
+                    Upload your claims data CSV file
+                  </CardDescription>
+                </CardContent>
+              </Card>
+
+              <Card>
+                <CardHeader>
+                  <CardTitle>2. Configure</CardTitle>
+                </CardHeader>
+                <CardContent>
+                  <CardDescription>
+                    Set up data schema and FIGS tree structure
+                  </CardDescription>
+                </CardContent>
+              </Card>
+
+              <Card>
+                <CardHeader>
+                  <CardTitle>3. Analyze</CardTitle>
+                </CardHeader>
+                <CardContent>
+                  <CardDescription>
+                    Explore interactive visualizations
+                  </CardDescription>
+                </CardContent>
+              </Card>
             </div>
 
-            <Link
-              href='/upload'
-              className='inline-flex items-center justify-center px-6 py-3 text-lg font-medium text-white bg-blue-600 rounded-lg hover:bg-blue-700 transition-colors'
-            >
-              Get Started
-            </Link>
+            <Button asChild size='lg'>
+              <Link href='/upload'>Get Started</Link>
+            </Button>
           </div>
         </div>
       </div>
