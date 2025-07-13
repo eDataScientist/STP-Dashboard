@@ -1,5 +1,6 @@
 import Papa from 'papaparse'
 import { ValidationResult } from '../types/core'
+import { ClaimRecord, DataSchema, DataType } from '../types/core'
 
 class CSVParser {
   static async validateFormat(file: File): Promise<ValidationResult> {
@@ -40,6 +41,62 @@ class CSVParser {
     }
 
     return result
+  }
+
+  static async parseFile(
+    file: File,
+    schema: DataSchema
+  ): Promise<ClaimRecord[]> {
+    return new Promise((resolve, reject) => {
+      Papa.parse(file, {
+        header: true,
+        skipEmptyLines: true,
+        complete: results => {
+          const claims: ClaimRecord[] = []
+          for (const row of results.data as Record<string, unknown>[]) {
+            const features: Record<string, number | string | boolean> = {}
+            for (const [col, value] of Object.entries(row)) {
+              if (col === schema.claimIdColumn) continue
+              const type = schema.columnTypes[col]
+              if (type) {
+                features[col] = this.convertValue(value, type)
+              } else {
+                features[col] = String(value)
+              }
+            }
+            claims.push({
+              id: row[schema.claimIdColumn] as string,
+              features,
+            })
+          }
+          resolve(claims)
+        },
+        error: error => reject(error),
+      })
+    })
+  }
+
+  private static convertValue(
+    value: unknown,
+    type: DataType
+  ): number | string | boolean {
+    if (value === null || value === undefined) return ''
+    switch (type) {
+      case 'float64':
+        return typeof value === 'string' ? parseFloat(value) : Number(value)
+      case 'int64':
+        return typeof value === 'string'
+          ? parseInt(value, 10)
+          : Math.floor(Number(value))
+      case 'bool':
+        if (typeof value === 'string')
+          return value.toLowerCase() === 'true' || value === '1'
+        return !!value
+      case 'object':
+        return String(value)
+      default:
+        return String(value)
+    }
   }
 }
 
