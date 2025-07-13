@@ -428,3 +428,52 @@ export interface ExportResult {
     recordCount: number
   }
 }
+
+// =============================================================================
+// FIGS TREE TYPES
+// =============================================================================
+
+export interface FIGSTree {
+  id: string
+  name: string
+  root: TreeNode
+  contribution?: number
+}
+
+export interface TreeNode {
+  type: 'decision' | 'leaf'
+  feature?: string
+  threshold?: number
+  operator?: '<=' | '>' | '<' | '>=' | '='
+  value?: number
+  left?: TreeNode
+  right?: TreeNode
+  path?: boolean // true if this node was taken in traversal
+}
+
+export interface TreeTraversal {
+  treeId: string
+  path: TreeTraversalStep[]
+  finalValue: number
+  contribution: number
+}
+
+export interface TreeTraversalStep {
+  nodeId: string
+  feature: string
+  threshold: number
+  actualValue: number
+  comparison: string
+  result: boolean
+  direction: 'left' | 'right'
+}
+
+export interface FIGSPrediction {
+  claimId: string
+  treeTraversals: TreeTraversal[]
+  individualContributions: number[]
+  totalSum: number
+  finalScore: number
+  classification: ClaimClassification
+  appliedSigmoid: boolean
+}
