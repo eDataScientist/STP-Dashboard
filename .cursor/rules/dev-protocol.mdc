@@ -1,7 +1,8 @@
 ---
 alwaysApply: true
 ---
-# FIGS Claims Interpreter - Autonomous AI Development Protocol
+
+## 📋 STEP-BY-STEP EXECUTION PROTOCOL# FIGS Claims Interpreter - Autonomous AI Development Protocol
 
 **CRITICAL:** This document contains MANDATORY rules for autonomous AI agents developing this project. **FOLLOW EVERY RULE EXACTLY.**
 
@@ -62,12 +63,15 @@ Task P0-003 depends on P0-002
 ```
 After completing each task, you MUST verify ALL completion criteria:
 
-1. Code is written and tested locally
-2. TypeScript compilation passes with no errors  
-3. ESLint and Prettier checks pass
-4. Component renders without console errors
-5. Basic functionality works as specified
-6. Code is committed to version control
+1. Task broken down into small increments (≤50 lines each)
+2. All incremental changes tested individually
+3. Code is written and tested locally
+4. TypeScript compilation passes with no errors  
+5. ESLint and Prettier checks pass
+6. Component renders without console errors
+7. Basic functionality works as specified
+8. All incremental commits successful
+9. Final integration test passed
 
 ALL criteria must be satisfied before marking task complete.
 ```
@@ -88,30 +92,38 @@ EXAMPLE:
 ### RULE 6: COMMIT PROTOCOL (MANDATORY)
 ```
 You MUST commit to version control:
-1. After completing EVERY individual task
-2. After completing each PHASE entirely
-3. Before moving to the next phase
-4. When encountering any blocking issues
+1. After completing EVERY incremental change (≤50 lines)
+2. After completing EVERY individual task
+3. After completing each PHASE entirely
+4. Before moving to the next phase
+5. When encountering any blocking issues
 
-COMMIT MESSAGE FORMAT:
-"feat: [TASK-ID] - [Brief description]
+INCREMENTAL COMMIT MESSAGE FORMAT:
+"feat: [TASK-ID] - [Brief increment description]
+
+- Incremental change: [What specific change was made]
+- Lines changed: [Approximate line count]
+- Functionality: [What this increment accomplishes]
+- Status: [Working/Tested/Integrated]"
+
+TASK COMPLETION COMMIT MESSAGE FORMAT:
+"feat: [TASK-ID] - [Brief description] - COMPLETE
 
 - Completed task: [Task Name]
 - Phase: [Phase Number]
 - Dependencies verified: [List]
 - All completion criteria met: Yes
+- Total incremental commits: [Number]
 
 [Additional details if needed]"
 
-EXAMPLE:
-"feat: P0-001 - Initialize Next.js project
+EXAMPLE INCREMENTAL COMMIT:
+"feat: P0-033 - Add basic SVG container setup
 
-- Completed task: Initialize Next.js 14 project with TypeScript  
-- Phase: 1
-- Dependencies verified: None (first task)
-- All completion criteria met: Yes
-
-Project structure created, TypeScript configured, dev server verified working."
+- Incremental change: Created SVG container with dimensions
+- Lines changed: 25
+- Functionality: Basic chart rendering foundation
+- Status: Working and tested"
 ```
 
 ### RULE 7: CONSECUTIVE ERROR HANDLING PROTOCOL (MANDATORY)
@@ -167,9 +179,181 @@ ERROR COMMIT FORMAT:
 - Next action required: [What needs to be resolved]"
 ```
 
----
+### RULE 9: PULL REQUEST PROTOCOL (MANDATORY FOR PHASE COMPLETION)
+```
+After completing ALL tasks in a phase, you MUST:
+1. Create a pull request for the entire phase
+2. Use the standardized PR template below
+3. Request review from human overseer
+4. DO NOT proceed to next phase until PR is approved
+5. Address any feedback before moving forward
 
-## 📋 STEP-BY-STEP EXECUTION PROTOCOL
+PULL REQUEST TITLE FORMAT:
+"Phase [X] Complete: [Phase Name]"
+
+PULL REQUEST DESCRIPTION TEMPLATE:
+"## Phase [X]: [Phase Name] - Complete
+
+### Summary
+[Brief description of what this phase accomplished]
+
+### Tasks Completed
+- [✓] **P0-XXX** Task Name
+- [✓] **P1-XXX** Task Name  
+- [✓] **P2-XXX** Task Name
+[List ALL completed tasks in this phase]
+
+### Key Features Implemented
+- [Feature 1 description]
+- [Feature 2 description]
+- [Feature 3 description]
+
+### Quality Assurance
+- [✓] All tasks completed and verified
+- [✓] TypeScript compilation passes
+- [✓] ESLint and Prettier checks pass
+- [✓] No console errors
+- [✓] All functionality tested
+- [✓] Documentation updated
+
+### Files Changed
+[List major files/directories created or modified]
+
+### Next Phase Preview
+Phase [X+1] will focus on: [Brief description of next phase goals]
+
+### Notes for Reviewer
+[Any specific areas to focus review on, challenges encountered, or decisions made]
+
+Ready for human review and approval to proceed to Phase [X+1]."
+```
+
+### RULE 10: INCREMENTAL DEVELOPMENT PROTOCOL (MANDATORY)
+```
+You MUST make small, incremental changes and test frequently:
+
+MAXIMUM CHANGE SIZE PER EDIT:
+• No more than 50 lines of code per single edit/change
+• No more than 3 files modified simultaneously  
+• No more than 1 major feature component at a time
+• Break large tasks into smaller, testable steps
+
+INCREMENTAL DEVELOPMENT PROCESS:
+1. Make small change (≤50 lines)
+2. Save and test the change immediately
+3. Verify TypeScript compilation passes
+4. Check that existing functionality still works
+5. If successful, commit the change
+6. Then proceed with next small change
+7. If error occurs, fix immediately before continuing
+
+PROHIBITED LARGE CHANGES:
+• Do not create entire components in one edit (>50 lines)
+• Do not modify multiple unrelated files simultaneously
+• Do not implement complex features all at once
+• Do not make sweeping refactoring changes
+• Do not copy/paste large code blocks without testing
+
+EXAMPLE INCREMENTAL APPROACH:
+Instead of: Creating entire SwarmPlot component (200+ lines) in one edit
+Do this: 
+1. Create basic component structure (20 lines) → Test
+2. Add props interface (15 lines) → Test  
+3. Add basic rendering logic (30 lines) → Test
+4. Add interaction handlers (25 lines) → Test
+5. Add styling and polish (40 lines) → Test
+
+COMMIT FREQUENCY:
+• Commit after every successful small change
+• Use descriptive commit messages for each increment
+• Build up complex features through small, working steps
+```
+```
+You MUST make small, incremental changes and test frequently:
+
+MAXIMUM CHANGE SIZE PER EDIT:
+• No more than 50 lines of code per single edit/change
+• No more than 3 files modified simultaneously  
+• No more than 1 major feature component at a time
+• Break large tasks into smaller, testable steps
+
+INCREMENTAL DEVELOPMENT PROCESS:
+1. Make small change (≤50 lines)
+2. Save and test the change immediately
+3. Verify TypeScript compilation passes
+4. Check that existing functionality still works
+5. If successful, commit the change
+6. Then proceed with next small change
+7. If error occurs, fix immediately before continuing
+
+PROHIBITED LARGE CHANGES:
+• Do not create entire components in one edit (>50 lines)
+• Do not modify multiple unrelated files simultaneously
+• Do not implement complex features all at once
+• Do not make sweeping refactoring changes
+• Do not copy/paste large code blocks without testing
+
+EXAMPLE INCREMENTAL APPROACH:
+Instead of: Creating entire SwarmPlot component (200+ lines) in one edit
+Do this: 
+1. Create basic component structure (20 lines) → Test
+2. Add props interface (15 lines) → Test  
+3. Add basic rendering logic (30 lines) → Test
+4. Add interaction handlers (25 lines) → Test
+5. Add styling and polish (40 lines) → Test
+
+COMMIT FREQUENCY:
+• Commit after every successful small change
+• Use descriptive commit messages for each increment
+• Build up complex features through small, working steps
+```
+```
+After completing ALL tasks in a phase, you MUST:
+1. Create a pull request for the entire phase
+2. Use the standardized PR template below
+3. Request review from human overseer
+4. DO NOT proceed to next phase until PR is approved
+5. Address any feedback before moving forward
+
+PULL REQUEST TITLE FORMAT:
+"Phase [X] Complete: [Phase Name]"
+
+PULL REQUEST DESCRIPTION TEMPLATE:
+"## Phase [X]: [Phase Name] - Complete
+
+### Summary
+[Brief description of what this phase accomplished]
+
+### Tasks Completed
+- [✓] **P0-XXX** Task Name
+- [✓] **P1-XXX** Task Name  
+- [✓] **P2-XXX** Task Name
+[List ALL completed tasks in this phase]
+
+### Key Features Implemented
+- [Feature 1 description]
+- [Feature 2 description]
+- [Feature 3 description]
+
+### Quality Assurance
+- [✓] All tasks completed and verified
+- [✓] TypeScript compilation passes
+- [✓] ESLint and Prettier checks pass
+- [✓] No console errors
+- [✓] All functionality tested
+- [✓] Documentation updated
+
+### Files Changed
+[List major files/directories created or modified]
+
+### Next Phase Preview
+Phase [X+1] will focus on: [Brief description of next phase goals]
+
+### Notes for Reviewer
+[Any specific areas to focus review on, challenges encountered, or decisions made]
+
+Ready for human review and approval to proceed to Phase [X+1]."
+```
 
 ### BEFORE STARTING ANY WORK
 ```
@@ -209,19 +393,23 @@ STEP 1: Pre-Task Checklist
 
 STEP 2: Task Execution
 □ Start working on ONLY this single task
-□ Follow the task description exactly
+□ Break task into small, incremental steps (≤50 lines each)
+□ Make one small change at a time
+□ Test each change immediately after making it
+□ Commit each successful small change
 □ Reference docs/srs.md and docs/blueprint.md as needed for details
-□ Test functionality as you develop
 □ Do NOT start any other tasks
 □ If commands fail, try up to 2 alternatives before requesting human help
 
 STEP 3: Completion Verification
+□ All incremental changes completed and tested
 □ Code written and tested locally
 □ TypeScript compilation passes (no errors)
 □ ESLint and Prettier checks pass
 □ Component renders without console errors  
 □ Basic functionality works as specified
-□ Code committed to version control
+□ All incremental commits successful
+□ Final integration test passed
 
 STEP 4: Task Marking and Progress Update
 □ Update Developer Checklist markdown
@@ -254,7 +442,14 @@ STEP 2: Phase Commit
 □ Include summary of all completed tasks
 □ Document any issues encountered and resolved
 
-STEP 3: Next Phase Preparation  
+STEP 3: Pull Request Creation (MANDATORY)
+□ Create pull request for the entire phase
+□ Use PR template from Rule 9
+□ Include all completed tasks and quality checks
+□ Request review from human overseer
+□ DO NOT proceed until PR is approved
+
+STEP 4: Next Phase Preparation (AFTER PR APPROVAL)
 □ Review documentation for next phase
 □ Understand next phase objectives
 □ Identify first task of next phase
@@ -270,7 +465,7 @@ EXAMPLE PHASE COMPLETION COMMIT:
 - File processing utilities created
 - Error handling framework established
 
-Ready to proceed to Phase 2: Core Visualization"
+Ready for PR review before proceeding to Phase 2: Core Visualization"
 ```
 
 ---
@@ -290,6 +485,9 @@ If ANY of these occur, STOP ALL WORK immediately:
 7. Unable to commit to version control
 8. Three consecutive errors on the same command/operation
 9. Unresolvable conflicts or system issues
+10. Pull request not approved by human reviewer
+11. Making changes larger than 50 lines in single edit
+12. Modifying more than 3 files simultaneously without testing
 ```
 
 ### RECOVERY PROTOCOL
@@ -372,8 +570,9 @@ MUST UPDATE:
 MUST UPDATE:
 1. docs/developer-checklist.md (phase completion summary)
 2. Git commit history (phase completion commit)
-3. README.md (if setup instructions change)
-4. Any discovered issues or deviations from plan
+3. Pull request creation with detailed phase summary
+4. README.md (if setup instructions change)
+5. Any discovered issues or deviations from plan
 ```
 
 ---
@@ -397,6 +596,7 @@ A phase is successful when:
 • Phase functionality works end-to-end
 • Quality gates passed
 • Clean commit history maintained
+• Pull request created and approved by human reviewer
 • Ready to start next phase
 ```
 
@@ -425,15 +625,25 @@ DO NOT:
 • Make assumptions about requirements
 • Attempt more than 2 alternatives for failing commands
 • Proceed after 3 consecutive errors on same operation
+• Start next phase without approved pull request
+• Make changes larger than 50 lines in single edit
+• Modify multiple unrelated files simultaneously
+• Create complex components all at once
+• Skip testing incremental changes
 
 ALWAYS:
 • Read documentation before starting each task
 • Verify dependencies before starting tasks
-• Test your work before marking complete
-• Commit regularly with good messages
+• Break tasks into small, incremental steps
+• Test each small change immediately
+• Commit after each successful increment
+• Make changes no larger than 50 lines at a time
+• Test functionality after every change
 • Update progress tracking accurately
 • Try reasonable alternatives for errors (up to 2 attempts)
 • Request human intervention after repeated failures
+• Create pull requests after completing each phase
+• Wait for PR approval before proceeding to next phase
 • Follow the protocol exactly as written
 ```
 
