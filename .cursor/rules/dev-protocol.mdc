@@ -14,7 +14,7 @@ alwaysApply: true
 BEFORE starting ANY task, you MUST:
 1. Read docs/srs.md (Software Requirements Specification) completely
 2. Read docs/blueprint.md (Software Blueprint) completely  
-3. Read docs/content-specification.md (Content Strategy & Information Architecture) completely
+3. Read docs/content-strategy.md (Content Strategy & Information Architecture) completely
 4. Read docs/developer-checklist.md (Developer Checklist) completely
 5. Locate the specific task in the Developer Checklist
 6. Understand the task's dependencies and requirements
@@ -24,8 +24,9 @@ DOCUMENTATION FILE STRUCTURE:
 docs/
 ├── srs.md                    # Software Requirements Specification
 ├── blueprint.md              # Software Blueprint & Implementation Guide  
-├── content-specification.md       # Content Strategy & Information Architecture
+├── content-strategy.md       # Content Strategy & Information Architecture
 ├── developer-checklist.md    # Developer Checklist (THIS FILE GETS UPDATED)
+├── design-refinement.md      # Design Refinement Guide (reference only)
 └── autonomous-protocol.md    # This protocol document
 
 IF you cannot access or understand ANY documentation, STOP and report the issue.
@@ -46,42 +47,42 @@ VIOLATION OF THIS RULE STOPS ALL DEVELOPMENT.
 ```
 BEFORE starting any task, you MUST:
 1. Check the task's listed dependencies in the Developer Checklist
-2. Verify ALL dependency tasks are marked as completed (✅)
+2. Verify ALL dependency tasks are marked as completed (with checkmark)
 3. If ANY dependency is incomplete, STOP and complete dependencies first
 4. Document which dependencies you verified
 
 EXAMPLE:
 Task P0-003 depends on P0-002
-- ✅ Check: Is P0-002 marked complete? 
-- ✅ If YES, proceed with P0-003
-- ❌ If NO, complete P0-002 first
+- Check: Is P0-002 marked complete? 
+- If YES, proceed with P0-003
+- If NO, complete P0-002 first
 ```
 
 ### RULE 4: TASK COMPLETION VERIFICATION (REQUIRED FOR EVERY TASK)
 ```
 After completing each task, you MUST verify ALL completion criteria:
 
-1. Code is written and tested locally ✅/❌
-2. TypeScript compilation passes with no errors ✅/❌  
-3. ESLint and Prettier checks pass ✅/❌
-4. Component renders without console errors ✅/❌
-5. Basic functionality works as specified ✅/❌
-6. Code is committed to version control ✅/❌
+1. Code is written and tested locally
+2. TypeScript compilation passes with no errors  
+3. ESLint and Prettier checks pass
+4. Component renders without console errors
+5. Basic functionality works as specified
+6. Code is committed to version control
 
-ALL criteria must be ✅ before marking task complete.
+ALL criteria must be satisfied before marking task complete.
 ```
 
 ### RULE 5: TASK MARKING PROTOCOL (MANDATORY)
 ```
 When a task is completed, you MUST:
 1. Update the docs/developer-checklist.md file
-2. Change [ ] to [✅] for the completed task
+2. Change [ ] to [✓] for the completed task
 3. Update the progress counter for that phase
-4. Add completion timestamp in format: [✅ YYYY-MM-DD HH:MM]
+4. Add completion timestamp in format: [✓ YYYY-MM-DD HH:MM]
 5. Commit the updated checklist to version control
 
 EXAMPLE:
-- [✅ 2025-07-13 14:30] **P0-001** Initialize Next.js 14 project with TypeScript
+- [✓ 2025-07-13 14:30] **P0-001** Initialize Next.js 14 project with TypeScript
 ```
 
 ### RULE 6: COMMIT PROTOCOL (MANDATORY)
@@ -98,7 +99,7 @@ COMMIT MESSAGE FORMAT:
 - Completed task: [Task Name]
 - Phase: [Phase Number]
 - Dependencies verified: [List]
-- All completion criteria met: ✅
+- All completion criteria met: Yes
 
 [Additional details if needed]"
 
@@ -108,12 +109,44 @@ EXAMPLE:
 - Completed task: Initialize Next.js 14 project with TypeScript  
 - Phase: 1
 - Dependencies verified: None (first task)
-- All completion criteria met: ✅
+- All completion criteria met: Yes
 
 Project structure created, TypeScript configured, dev server verified working."
 ```
 
-### RULE 7: ERROR HANDLING PROTOCOL (MANDATORY)
+### RULE 7: CONSECUTIVE ERROR HANDLING PROTOCOL (MANDATORY)
+```
+When encountering errors with commands or operations:
+
+ATTEMPT RESOLUTION UP TO 2 TIMES:
+1. First error: Try reasonable alternative or fix
+2. Second error: Try one more alternative approach
+3. Third error: STOP and request human intervention
+
+WHEN REQUESTING HUMAN INTERVENTION:
+1. STOP all development immediately
+2. Document all attempted solutions
+3. Document the exact errors encountered
+4. Create detailed instructions for human overseer
+5. Commit current progress with clear status
+6. Wait for human intervention to resolve
+
+HUMAN INTERVENTION REQUEST FORMAT:
+"pause: Multiple errors encountered for [TASK-ID]
+
+- Task: [Task Name]
+- Command/operation failing: [exact command or operation]
+- Attempts made:
+  1. [First attempt and error]
+  2. [Second attempt and error]  
+  3. [Third attempt and error]
+- Current status: Blocked after 3 consecutive errors
+- Next steps needed: [what human should investigate/resolve]
+
+Please resolve the issue and confirm when ready to continue."
+```
+
+### RULE 8: ERROR HANDLING PROTOCOL (MANDATORY)
 ```
 When encountering ANY error or blocker:
 1. STOP all development immediately
@@ -145,7 +178,7 @@ STEP 1: Environment Setup
 2. Verify you can access all documentation files in docs/ folder:
    - docs/srs.md (Software Requirements Specification)
    - docs/blueprint.md (Software Blueprint)
-   - docs/content-specification.md (Content Strategy & Information Architecture)
+   - docs/content-strategy.md (Content Strategy & Information Architecture)
    - docs/developer-checklist.md (Developer Checklist)
    - docs/autonomous-protocol.md (This protocol document)
 3. Confirm you understand the project structure
@@ -154,7 +187,7 @@ STEP 1: Environment Setup
 STEP 2: Initial Documentation Review  
 1. Read docs/srs.md completely - understand ALL requirements
 2. Read docs/blueprint.md completely - understand architecture  
-3. Read docs/content-specification.md - understand all page content
+3. Read docs/content-strategy.md - understand all page content
 4. Study docs/developer-checklist.md - understand task flow
 5. Identify the first uncompleted task
 
@@ -180,6 +213,7 @@ STEP 2: Task Execution
 □ Reference docs/srs.md and docs/blueprint.md as needed for details
 □ Test functionality as you develop
 □ Do NOT start any other tasks
+□ If commands fail, try up to 2 alternatives before requesting human help
 
 STEP 3: Completion Verification
 □ Code written and tested locally
@@ -209,7 +243,7 @@ STEP 5: Next Task Preparation
 When ALL tasks in a phase are complete:
 
 STEP 1: Phase Verification
-□ Every task in the phase marked ✅
+□ Every task in the phase marked with checkmark
 □ Phase progress shows 100% complete
 □ All commits for the phase successful
 □ No outstanding errors or issues
@@ -254,6 +288,8 @@ If ANY of these occur, STOP ALL WORK immediately:
 5. Previous task completion was incorrectly marked
 6. Development environment is not working properly
 7. Unable to commit to version control
+8. Three consecutive errors on the same command/operation
+9. Unresolvable conflicts or system issues
 ```
 
 ### RECOVERY PROTOCOL
@@ -262,13 +298,19 @@ When a stop condition occurs:
 
 1. STOP all development work
 2. Document the exact issue encountered
-3. Create detailed error report with:
+3. Create detailed error report OR human intervention request
+4. Commit current progress with error/instruction documentation
+5. Wait for manual intervention to resolve the issue
+
+FOR CONSECUTIVE ERRORS (3+ attempts):
+Use the HUMAN INTERVENTION REQUEST FORMAT from Rule 7
+
+FOR OTHER CRITICAL FAILURES:
+Create detailed error report with:
    - What task you were attempting
    - What went wrong
    - Current state of the project
    - What needs to be resolved to continue
-4. Commit current progress with error documentation
-5. Wait for manual intervention to resolve the issue
 ```
 
 ---
@@ -291,7 +333,7 @@ Functional Checks:
 □ Feature works as described in task
 □ Matches requirements in docs/srs.md
 □ Follows patterns in docs/blueprint.md
-□ Uses content from docs/content-specification.md
+□ Uses content from docs/content-strategy.md
 □ No broken functionality introduced
 
 Documentation Checks:
@@ -341,31 +383,31 @@ MUST UPDATE:
 ### TASK-LEVEL SUCCESS
 ```
 A task is successful when:
-✅ All completion criteria met
-✅ Code committed successfully  
-✅ Next task dependencies satisfied
-✅ No regressions introduced
-✅ Documentation updated correctly
+• All completion criteria met
+• Code committed successfully  
+• Next task dependencies satisfied
+• No regressions introduced
+• Documentation updated correctly
 ```
 
 ### PHASE-LEVEL SUCCESS
 ```
 A phase is successful when:
-✅ All tasks in phase completed
-✅ Phase functionality works end-to-end
-✅ Quality gates passed
-✅ Clean commit history maintained
-✅ Ready to start next phase
+• All tasks in phase completed
+• Phase functionality works end-to-end
+• Quality gates passed
+• Clean commit history maintained
+• Ready to start next phase
 ```
 
 ### PROJECT-LEVEL SUCCESS
 ```
 The project is successful when:
-✅ All 4 phases completed
-✅ All 78 tasks marked complete
-✅ Application works as specified in SRS
-✅ No critical bugs or issues
-✅ Clean, deployable codebase
+• All 4 phases completed
+• All 78 tasks marked complete
+• Application works as specified in SRS
+• No critical bugs or issues
+• Clean, deployable codebase
 ```
 
 ---
@@ -374,22 +416,25 @@ The project is successful when:
 
 ```
 DO NOT:
-❌ Skip tasks or mark them complete without doing the work
-❌ Work on multiple tasks simultaneously
-❌ Ignore dependency requirements
-❌ Skip documentation review
-❌ Commit broken or untested code
-❌ Continue working when encountering errors
-❌ Make assumptions about requirements
+• Skip tasks or mark them complete without doing the work
+• Work on multiple tasks simultaneously
+• Ignore dependency requirements
+• Skip documentation review
+• Commit broken or untested code
+• Continue working when encountering critical failures
+• Make assumptions about requirements
+• Attempt more than 2 alternatives for failing commands
+• Proceed after 3 consecutive errors on same operation
 
 ALWAYS:
-✅ Read documentation before starting each task
-✅ Verify dependencies before starting tasks
-✅ Test your work before marking complete
-✅ Commit regularly with good messages
-✅ Update progress tracking accurately
-✅ Stop and ask for help when stuck
-✅ Follow the protocol exactly as written
+• Read documentation before starting each task
+• Verify dependencies before starting tasks
+• Test your work before marking complete
+• Commit regularly with good messages
+• Update progress tracking accurately
+• Try reasonable alternatives for errors (up to 2 attempts)
+• Request human intervention after repeated failures
+• Follow the protocol exactly as written
 ```
 
 ---
@@ -411,8 +456,9 @@ project-root/
 ├── docs/                          # Documentation folder (you access these)
 │   ├── srs.md
 │   ├── blueprint.md
-│   ├── content-specification.md
+│   ├── content-strategy.md
 │   ├── developer-checklist.md     # YOU UPDATE THIS FILE
+│   ├── design-refinement.md
 │   └── autonomous-protocol.md
 ├── src/                           # Source code (you create this)
 ├── public/                        # Static assets (you create this)
