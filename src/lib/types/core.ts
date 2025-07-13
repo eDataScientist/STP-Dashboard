@@ -526,3 +526,39 @@ export interface FIGSPrediction {
   classification: ClaimClassification
   appliedSigmoid: boolean
 }
+
+// =============================================================================
+// CONFIGURATION TYPES
+// =============================================================================
+
+/**
+ * Overall application configuration
+ */
+export interface ApplicationConfig {
+  scoreThresholds: ScoreThresholds
+  animationSpeed: number
+  maxDataPoints: number
+  virtualizedThreshold: number
+  exportFormats: string[]
+  ui: UIPreferences
+  performance: PerformanceConfig
+}
+
+/**
+ * UI preferences configuration
+ */
+export interface UIPreferences {
+  theme: 'light' | 'dark'
+  compactMode: boolean
+  showAdvancedControls: boolean
+  language: string
+}
+
+/**
+ * Performance-related configuration
+ */
+export interface PerformanceConfig {
+  enableVirtualization: boolean
+  enableWebWorkers: boolean
+  maxRenderPoints: number
+}
