@@ -1,4 +1,5 @@
 # FIGS Interactive Claims Interpreter
+
 ## Software Requirements Specification (SRS)
 
 **Document Version:** 1.0  
@@ -10,10 +11,13 @@
 ## 1. Introduction
 
 ### 1.1 Purpose
+
 This document specifies the requirements for developing an interactive web application that demonstrates FIGS (Fast Interpretable Greedy-Tree Sums) model interpretability for claims anomaly detection. The application serves as a presentation and demonstration tool for the data science team to showcase model decision-making processes.
 
 ### 1.2 Scope
+
 The application will:
+
 - Load and visualize claims data with anomaly scores
 - Display interactive decision tree traversals
 - Provide animated explanations of model predictions
@@ -21,7 +25,9 @@ The application will:
 - Handle various claim types and edge cases
 
 ### 1.3 Document Conventions
+
 Requirements are prioritized using the MoSCoW method:
+
 - **M** - Must Have (Critical)
 - **S** - Should Have (Important)
 - **C** - Could Have (Nice to Have)
@@ -34,6 +40,7 @@ Requirements are prioritized using the MoSCoW method:
 ### 2.1 Data Input and Upload
 
 #### FR-1: CSV File Upload Interface **[M]**
+
 - The system must allow the user to upload CSV files through a drag-and-drop interface
 - The system must allow the user to upload CSV files through a file browser dialog
 - The system must allow the user to upload CSV files up to 500MB in size
@@ -46,6 +53,7 @@ Requirements are prioritized using the MoSCoW method:
 - The system must support CSV files with up to 100 columns
 
 #### FR-2: Schema Configuration Management **[M]**
+
 - The system must allow the user to upload schema configuration as a JSON file
 - The system must allow the user to paste schema configuration as JSON text
 - The system must validate JSON schema format before processing
@@ -58,6 +66,7 @@ Requirements are prioritized using the MoSCoW method:
 - The system must save the last used schema configuration for reuse
 
 #### FR-3: FIGS Tree Structure Input **[M]**
+
 - The system must allow the user to upload FIGS tree structure as a text file
 - The system must allow the user to paste FIGS tree structure as plain text
 - The system must parse the exact indented text format as provided in requirements
@@ -73,6 +82,7 @@ Requirements are prioritized using the MoSCoW method:
 ### 2.2 Data Processing and Validation
 
 #### FR-4: CSV Data Processing **[M]**
+
 - The system must parse CSV data according to the provided schema configuration
 - The system must convert data types as specified in the schema
 - The system must identify and flag rows with missing required data
@@ -84,6 +94,7 @@ Requirements are prioritized using the MoSCoW method:
 - The system must allow the user to download a report of data processing issues
 
 #### FR-5: Tree Structure Validation **[M]**
+
 - The system must validate that tree structure references only features present in the CSV schema
 - The system must validate that all threshold values are numeric
 - The system must validate that all comparison operators are valid (<=, >, <, >=, =)
@@ -95,6 +106,7 @@ Requirements are prioritized using the MoSCoW method:
 ### 2.3 Main Dashboard Interface
 
 #### FR-6: Swarm Plot Visualization **[M]**
+
 - The system must display all valid claims as individual points on a horizontal swarm plot
 - The system must position points vertically based on anomaly score value
 - The system must apply jitter to points horizontally to prevent overlap
@@ -107,6 +119,7 @@ Requirements are prioritized using the MoSCoW method:
 - The system must display score threshold lines as horizontal guides
 
 #### FR-7: Swarm Plot Interactions **[M]**
+
 - The system must display a tooltip when the user hovers over any point
 - The system must include claim ID in the hover tooltip
 - The system must include anomaly score in the hover tooltip
@@ -119,6 +132,7 @@ Requirements are prioritized using the MoSCoW method:
 - The system must maintain hover state until user moves to another point
 
 #### FR-8: Performance Optimization for Large Datasets **[M]**
+
 - The system must implement virtualization for datasets exceeding 10,000 points
 - The system must maintain 60 FPS during zoom and pan operations
 - The system must render initial swarm plot within 5 seconds for 100k points
@@ -129,6 +143,7 @@ Requirements are prioritized using the MoSCoW method:
 ### 2.4 Tree Visualization System
 
 #### FR-9: Tree Popup Interface **[M]**
+
 - The system must open tree visualization in a full-screen modal popup
 - The system must display all trees vertically arranged in a single scrollable canvas
 - The system must provide a close button (X) in the top-right corner of the popup
@@ -141,6 +156,7 @@ Requirements are prioritized using the MoSCoW method:
 - The system must disable background scrolling when popup is open
 
 #### FR-10: Individual Tree Structure Display **[M]**
+
 - The system must display each tree with a clear title (e.g., "Tree #0", "Tree #1")
 - The system must display tree contribution value for each tree prominently
 - The system must arrange nodes in a hierarchical tree structure from left to right
@@ -155,6 +171,7 @@ Requirements are prioritized using the MoSCoW method:
 - The system must ensure adequate spacing between nodes to prevent overlap
 
 #### FR-11: Tree Traversal Animation **[M]**
+
 - The system must animate the decision path through each tree sequentially
 - The system must highlight the active node with a distinct color during animation
 - The system must display the actual feature value being compared at each decision node
@@ -167,6 +184,7 @@ Requirements are prioritized using the MoSCoW method:
 - The system must ensure animations maintain 60 FPS performance
 
 #### FR-12: Final Score Calculation Display **[M]**
+
 - The system must display individual tree contribution values clearly
 - The system must show the mathematical sum of all tree contributions
 - The system must display the sigmoid function application if applicable
@@ -181,6 +199,7 @@ Requirements are prioritized using the MoSCoW method:
 ### 2.5 Edge Case Handling
 
 #### FR-13: Missing Data Claims **[M]**
+
 - The system must identify claims with missing required features before tree traversal
 - The system must display an informative popup for claims with missing data
 - The system must list which specific features are missing
@@ -191,6 +210,7 @@ Requirements are prioritized using the MoSCoW method:
 - The system must use distinct visual styling for missing data popup
 
 #### FR-14: Excluded Claims Support **[S]**
+
 - The system must identify claims excluded due to business rules from CSV metadata
 - The system must display exclusion reason popup when excluded claims are clicked
 - The system must show the secondary tag explaining exclusion reason
@@ -200,6 +220,7 @@ Requirements are prioritized using the MoSCoW method:
 - The system must maintain consistent popup styling with tree visualization
 
 #### FR-15: Univariate Outlier Claims **[S]**
+
 - The system must identify univariate outlier claims from CSV metadata
 - The system must display outlier analysis popup when univariate outlier claims are clicked
 - The system must show which specific features triggered outlier detection
@@ -211,6 +232,7 @@ Requirements are prioritized using the MoSCoW method:
 ### 2.6 Navigation and User Interface Controls
 
 #### FR-16: Zoom and Pan Controls **[M]**
+
 - The system must provide zoom in/out buttons for both swarm plot and tree visualization
 - The system must support mouse wheel zooming with smooth acceleration
 - The system must provide reset zoom button to return to default view
@@ -221,6 +243,7 @@ Requirements are prioritized using the MoSCoW method:
 - The system must maintain aspect ratio during zoom operations
 
 #### FR-17: Keyboard Shortcuts **[S]**
+
 - The system must support Escape key to close any open popup
 - The system must support Space bar to play/pause animations
 - The system must support Arrow keys for navigation in tree view
@@ -230,6 +253,7 @@ Requirements are prioritized using the MoSCoW method:
 - The system must display keyboard shortcuts in a help tooltip
 
 #### FR-18: Responsive Design **[S]**
+
 - The system must adapt layout for screen widths down to 1024px
 - The system must maintain functionality on tablet devices (768px width)
 - The system must adjust font sizes appropriately for different screen sizes
@@ -240,6 +264,7 @@ Requirements are prioritized using the MoSCoW method:
 ### 2.7 Configuration Management
 
 #### FR-19: Score Threshold Configuration **[S]**
+
 - The system must allow runtime adjustment of score thresholds through a settings panel
 - The system must provide input fields for Low/Medium and Medium/High threshold values
 - The system must validate that threshold values are between 0.0 and 1.0
@@ -251,6 +276,7 @@ Requirements are prioritized using the MoSCoW method:
 - The system must allow reset to default threshold values
 
 #### FR-20: Model Configuration Swapping **[S]**
+
 - The system must provide interface to load new tree configuration without application restart
 - The system must validate new tree configuration against existing CSV data
 - The system must clear existing visualization state when loading new model
@@ -262,6 +288,7 @@ Requirements are prioritized using the MoSCoW method:
 ### 2.8 Export and Reporting Features **[C]**
 
 #### FR-21: Visualization Export **[C]**
+
 - The system must allow export of swarm plot as PNG image at high resolution
 - The system must allow export of individual tree visualizations as PNG images
 - The system must allow export of complete tree analysis as PDF report
@@ -270,6 +297,7 @@ Requirements are prioritized using the MoSCoW method:
 - The system must maintain visual quality in exported images
 
 #### FR-22: Data Export **[C]**
+
 - The system must allow export of processed claims data as CSV
 - The system must allow export of tree analysis results as JSON
 - The system must allow export of anomaly score summary statistics
@@ -283,13 +311,15 @@ Requirements are prioritized using the MoSCoW method:
 ### 3.1 Performance
 
 #### NFR-1: Large Dataset Performance **[M]**
+
 - **Description:** Handle hundreds of thousands of records efficiently
-- **Metrics:** 
+- **Metrics:**
   - Initial load: < 10 seconds for 100k records
   - Swarm plot interactions: < 100ms response time
   - Tree visualization: < 2 seconds to render
 
 #### NFR-2: Animation Performance **[M]**
+
 - **Description:** Smooth animations at 60 FPS
 - **Metrics:**
   - Tree traversal animations maintain 60 FPS
@@ -299,6 +329,7 @@ Requirements are prioritized using the MoSCoW method:
 ### 3.2 Usability
 
 #### NFR-3: Intuitive Interface **[M]**
+
 - **Description:** Interface usable without extensive training
 - **Metrics:**
   - Data science team can use effectively within 30 minutes
@@ -306,6 +337,7 @@ Requirements are prioritized using the MoSCoW method:
   - Consistent interaction patterns throughout
 
 #### NFR-4: Accessibility **[S]**
+
 - **Description:** Basic accessibility compliance
 - **Standards:** WCAG 2.1 Level A minimum
 - **Features:**
@@ -316,11 +348,13 @@ Requirements are prioritized using the MoSCoW method:
 ### 3.3 Compatibility
 
 #### NFR-5: Browser Support **[M]**
+
 - **Description:** Modern browser compatibility
 - **Targets:** Chrome 100+, Firefox 100+, Safari 15+, Edge 100+
 - **Features:** Full functionality in target browsers
 
 #### NFR-6: Operating System Support **[M]**
+
 - **Description:** Cross-platform Docker deployment
 - **Targets:** Windows, macOS, Linux
 - **Requirements:** Docker runtime compatibility
@@ -328,6 +362,7 @@ Requirements are prioritized using the MoSCoW method:
 ### 3.4 Maintainability
 
 #### NFR-7: Component Reusability **[M]**
+
 - **Description:** Modular, reusable component architecture
 - **Goals:**
   - Easy adaptation to different datasets
@@ -335,6 +370,7 @@ Requirements are prioritized using the MoSCoW method:
   - Extensible visualization components
 
 #### NFR-8: Code Quality **[S]**
+
 - **Description:** High-quality, maintainable codebase
 - **Standards:**
   - TypeScript for type safety
@@ -345,6 +381,7 @@ Requirements are prioritized using the MoSCoW method:
 ### 3.5 Security
 
 #### NFR-9: Data Privacy **[M]**
+
 - **Description:** Secure handling of claims data
 - **Requirements:**
   - No data persistence beyond session
@@ -356,6 +393,7 @@ Requirements are prioritized using the MoSCoW method:
 ## 4. Technical Architecture
 
 ### 4.1 Technology Stack
+
 - **Frontend Framework:** Next.js 14+
 - **UI Components:** shadcn/ui + custom components
 - **Styling:** Tailwind CSS
@@ -365,6 +403,7 @@ Requirements are prioritized using the MoSCoW method:
 - **Package Manager:** npm/yarn
 
 ### 4.2 Application Structure
+
 ```
 src/
 ├── components/
@@ -381,6 +420,7 @@ src/
 ```
 
 ### 4.3 Data Flow
+
 1. CSV upload → Schema validation → Data parsing
 2. Tree configuration → Structure validation → Tree building
 3. Swarm plot rendering → User interaction → Tree popup
@@ -393,13 +433,16 @@ src/
 ### 5.1 Input Data Formats
 
 #### CSV Data Structure
+
 - **Required:** `claim_id` column (any name, specified in schema)
 - **Variable:** Feature columns matching tree requirements
 - **Optional:** `anomaly_score`, classification tags
 - **Size:** Support up to 500k records
 
 #### Tree Structure Format
+
 **Text Format (Input):**
+
 ```
 count_of_parts <= 1.500 (Tree #0 root)
 	damage_left <= 0.500 (split)
@@ -410,11 +453,12 @@ count_of_parts <= 1.500 (Tree #0 root)
 ```
 
 **YAML Format (Internal):**
+
 ```yaml
 trees:
-  - name: "Tree #0"
+  - name: 'Tree #0'
     root:
-      feature: "count_of_parts"
+      feature: 'count_of_parts'
       threshold: 1.500
       # ... structure continues
 ```
@@ -422,6 +466,7 @@ trees:
 ### 5.2 Configuration Files
 
 #### Schema Mapping
+
 ```json
 {
   "claim_id": "object",
@@ -433,6 +478,7 @@ trees:
 ```
 
 #### Application Config
+
 ```json
 {
   "score_thresholds": {
@@ -451,6 +497,7 @@ trees:
 ## 6. User Interface Requirements
 
 ### 6.1 Layout Structure
+
 - **Header:** Application title, configuration controls
 - **Main Area:** Swarm plot or tree visualization
 - **Footer:** Status information, controls
@@ -458,6 +505,7 @@ trees:
 ### 6.2 Component Specifications
 
 #### Swarm Plot Component
+
 - Responsive SVG-based visualization
 - Hover states with claim information tooltip
 - Click handlers for tree popup trigger
@@ -465,6 +513,7 @@ trees:
 - Zoom and pan capabilities for large datasets
 
 #### Tree Visualization Component
+
 - Full-screen popup modal
 - Vertical tree layout with scroll/zoom
 - Animated path highlighting
@@ -472,6 +521,7 @@ trees:
 - Navigation controls (close, reset, replay)
 
 #### Data Upload Component
+
 - Drag-and-drop file upload
 - Progress indicators for large files
 - Error handling and validation feedback
@@ -482,6 +532,7 @@ trees:
 ## 7. Testing Requirements
 
 ### 7.1 Functional Testing **[M]**
+
 - Upload and parsing of various CSV formats
 - Tree structure parsing and validation
 - Swarm plot interactions and performance
@@ -489,12 +540,14 @@ trees:
 - Edge case handling (missing data, outliers)
 
 ### 7.2 Performance Testing **[M]**
+
 - Large dataset loading (100k+ records)
 - Visualization rendering performance
 - Animation frame rates
 - Memory usage optimization
 
 ### 7.3 Usability Testing **[S]**
+
 - Data science team workflow validation
 - Interface intuitiveness assessment
 - Error message clarity evaluation
@@ -504,12 +557,14 @@ trees:
 ## 8. Deployment Requirements
 
 ### 8.1 Docker Configuration **[M]**
+
 - **Base Image:** Node.js 18+ Alpine
 - **Port:** 3000 (configurable)
 - **Volume Mounts:** None required (stateless)
 - **Environment Variables:** Minimal configuration
 
 ### 8.2 Development Setup **[M]**
+
 - **Prerequisites:** Node.js 18+, Docker
 - **Commands:**
   - `npm install` - Install dependencies
@@ -522,11 +577,13 @@ trees:
 ## 9. Documentation Requirements
 
 ### 9.1 User Documentation **[M]**
+
 - Quick start guide for data science team
 - Configuration file examples
 - Troubleshooting common issues
 
 ### 9.2 Technical Documentation **[S]**
+
 - Component API documentation
 - Data format specifications
 - Deployment instructions
@@ -536,6 +593,7 @@ trees:
 ## 10. Future Considerations **[W]**
 
 ### 10.1 Potential Enhancements
+
 - Real-time data streaming capabilities
 - Advanced filtering and search functionality
 - Multiple model comparison views
@@ -543,6 +601,7 @@ trees:
 - Advanced export and reporting features
 
 ### 10.2 Scalability Considerations
+
 - Backend API development for production deployment
 - Database integration for persistent storage
 - Multi-user support and collaboration features
@@ -553,6 +612,7 @@ trees:
 ## 11. Acceptance Criteria Summary
 
 The application will be considered complete when:
+
 1. All **[M]** Must Have requirements are fully implemented
 2. Performance benchmarks are met for target dataset sizes
 3. Data science team can successfully demonstrate model interpretability
@@ -562,6 +622,7 @@ The application will be considered complete when:
 ---
 
 **Document Approval:**
+
 - **Data Science Lead:** [Pending]
 - **Development Lead:** [Pending]
 - **Technical Reviewer:** [Pending]

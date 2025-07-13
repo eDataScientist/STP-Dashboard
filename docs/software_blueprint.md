@@ -1,4 +1,5 @@
 # FIGS Interactive Claims Interpreter
+
 ## Software Blueprint & Implementation Guide
 
 **Version:** 1.0  
@@ -10,6 +11,7 @@
 ## 1. Implementation Phases & Build Order
 
 ### Phase 1: Foundation & Data Layer (Week 1-2)
+
 ```
 Priority Order:
 1. Project setup and base infrastructure
@@ -20,6 +22,7 @@ Priority Order:
 ```
 
 ### Phase 2: Core Visualization (Week 3-4)
+
 ```
 Priority Order:
 1. Swarm plot basic rendering
@@ -30,6 +33,7 @@ Priority Order:
 ```
 
 ### Phase 3: Interactive Features (Week 5-6)
+
 ```
 Priority Order:
 1. Tree traversal animation system
@@ -40,6 +44,7 @@ Priority Order:
 ```
 
 ### Phase 4: Polish & Optimization (Week 7-8)
+
 ```
 Priority Order:
 1. Performance optimization for large datasets
@@ -161,7 +166,11 @@ class CSVParser {
   static validateFormat(file: File): Promise<ValidationResult>
   static detectDelimiter(content: string): string
   static detectEncoding(file: File): Promise<string>
-  static processLargeFile(file: File, chunkSize: number, onProgress: ProgressCallback): Promise<ClaimRecord[]>
+  static processLargeFile(
+    file: File,
+    chunkSize: number,
+    onProgress: ProgressCallback
+  ): Promise<ClaimRecord[]>
 }
 
 // lib/parsers/TreeParser.ts
@@ -170,14 +179,23 @@ class TreeParser {
   static validateTreeStructure(trees: FIGSTree[]): ValidationResult
   static convertToYAML(trees: FIGSTree[]): string
   static parseYAMLFormat(yamlText: string): FIGSTree[]
-  static validateTreeFeatures(trees: FIGSTree[], schema: DataSchema): ValidationResult
+  static validateTreeFeatures(
+    trees: FIGSTree[],
+    schema: DataSchema
+  ): ValidationResult
 }
 
 // lib/validators/SchemaValidator.ts
 class SchemaValidator {
   static validateJSON(schemaText: string): ValidationResult
-  static validateColumns(schema: DataSchema, csvHeaders: string[]): ValidationResult
-  static validateDataTypes(schema: DataSchema, sampleData: any[]): ValidationResult
+  static validateColumns(
+    schema: DataSchema,
+    csvHeaders: string[]
+  ): ValidationResult
+  static validateDataTypes(
+    schema: DataSchema,
+    sampleData: any[]
+  ): ValidationResult
   static generateDefaultSchema(csvHeaders: string[]): DataSchema
 }
 ```
@@ -188,12 +206,12 @@ class SchemaValidator {
 // lib/calculators/FIGSEngine.ts
 class FIGSEngine {
   constructor(trees: FIGSTree[])
-  
+
   calculatePrediction(claim: ClaimRecord): FIGSPrediction
   traverseTree(tree: FIGSTree, claim: ClaimRecord): TreeTraversal
   calculateFinalScore(contributions: number[], applySigmoid: boolean): number
   classifyScore(score: number, thresholds: ScoreThresholds): ClaimClassification
-  
+
   private evaluateNode(node: TreeNode, features: Record<string, any>): boolean
   private findPath(node: TreeNode, features: Record<string, any>): TreeNode[]
   private calculateContribution(traversal: TreeTraversal): number
@@ -203,7 +221,10 @@ class FIGSEngine {
 class ScoreCalculator {
   static sigmoid(x: number): number
   static applyThresholds(score: number, thresholds: ScoreThresholds): string
-  static calculateConfidence(score: number, historicalData?: ClaimRecord[]): number
+  static calculateConfidence(
+    score: number,
+    historicalData?: ClaimRecord[]
+  ): number
 }
 ```
 
@@ -220,21 +241,21 @@ interface ApplicationState {
   treesConfig: FIGSTree[]
   isDataLoaded: boolean
   isDataProcessing: boolean
-  
+
   // UI State
   selectedClaim: ClaimRecord | null
   isTreePopupOpen: boolean
   currentView: 'swarm' | 'tree' | 'upload'
-  
+
   // Visualization State
   swarmPlotConfig: SwarmPlotConfig
   treeVisualizationConfig: TreeVisualizationConfig
   animationState: AnimationState
-  
+
   // Configuration State
   scoreThresholds: ScoreThresholds
   uiPreferences: UIPreferences
-  
+
   // Actions
   loadClaimsData: (file: File, schema: DataSchema) => Promise<void>
   loadTreesConfig: (trees: FIGSTree[]) => void
@@ -251,13 +272,13 @@ interface VisualizationState {
   hoveredPoint: SwarmPlotPoint | null
   swarmPlotDimensions: Dimensions
   zoomTransform: ZoomTransform
-  
+
   // Tree Visualization State
   currentPrediction: FIGSPrediction | null
   animationProgress: AnimationProgress
   isAnimating: boolean
   animationSpeed: number
-  
+
   // Actions
   generateSwarmPlotData: (claims: ClaimRecord[]) => void
   setHoveredPoint: (point: SwarmPlotPoint | null) => void
@@ -293,7 +314,7 @@ const ApplicationShell = () => {
 // components/core/DataUploadZone.tsx
 const DataUploadZone = () => {
   const [uploadState, setUploadState] = useState<UploadState>('idle')
-  
+
   return (
     <Card className="mb-6">
       <CardHeader>
@@ -314,11 +335,11 @@ const DataUploadZone = () => {
 // components/core/MainVisualizationArea.tsx
 const MainVisualizationArea = () => {
   const { claimsData, isDataLoaded } = useApplicationStore()
-  
+
   if (!isDataLoaded) {
     return <DataUploadPrompt />
   }
-  
+
   return (
     <Card className="h-[calc(100vh-300px)]">
       <CardHeader>
@@ -342,12 +363,12 @@ const MainVisualizationArea = () => {
 const CSVUploadComponent = () => {
   const [dragActive, setDragActive] = useState(false)
   const [uploadProgress, setUploadProgress] = useState(0)
-  
+
   const handleFileDrop = async (files: FileList) => {
     const file = files[0]
     await validateAndProcessCSV(file)
   }
-  
+
   return (
     <div className={cn("upload-zone", { "drag-active": dragActive })}>
       <FileDropZone onDrop={handleFileDrop} />
@@ -361,11 +382,11 @@ const CSVUploadComponent = () => {
 const SchemaConfigComponent = () => {
   const [schemaInput, setSchemaInput] = useState('')
   const [validationResult, setValidationResult] = useState<ValidationResult>()
-  
+
   return (
     <div className="space-y-4">
       <Label>Data Schema Configuration</Label>
-      <Textarea 
+      <Textarea
         placeholder="Paste JSON schema or upload file..."
         value={schemaInput}
         onChange={(e) => setSchemaInput(e.target.value)}
@@ -382,11 +403,11 @@ const SchemaConfigComponent = () => {
 const TreeConfigComponent = () => {
   const [treeInput, setTreeInput] = useState('')
   const [parsedTrees, setParsedTrees] = useState<FIGSTree[]>([])
-  
+
   return (
     <div className="space-y-4">
       <Label>FIGS Tree Configuration</Label>
-      <Textarea 
+      <Textarea
         placeholder="Paste tree structure..."
         value={treeInput}
         onChange={(e) => setTreeInput(e.target.value)}
@@ -409,20 +430,20 @@ const SwarmPlotVisualization = () => {
   const svgRef = useRef<SVGSVGElement>(null)
   const { claimsData, selectClaim } = useApplicationStore()
   const { swarmPlotData, hoveredPoint, setHoveredPoint } = useVisualizationStore()
-  
+
   useEffect(() => {
     if (!svgRef.current || !swarmPlotData.length) return
-    
+
     const visualization = new SwarmPlotRenderer(svgRef.current)
     visualization.render(swarmPlotData)
     visualization.setupInteractions({
       onHover: setHoveredPoint,
       onClick: selectClaim
     })
-    
+
     return () => visualization.cleanup()
   }, [swarmPlotData])
-  
+
   return (
     <div className="h-full relative">
       <svg ref={svgRef} className="w-full h-full" />
@@ -438,27 +459,27 @@ class SwarmPlotRenderer {
   private xScale: d3.ScaleLinear<number, number>
   private yScale: d3.ScaleLinear<number, number>
   private simulation: d3.Simulation<SwarmPlotPoint, undefined>
-  
+
   constructor(svgElement: SVGSVGElement) {
     this.svg = d3.select(svgElement)
     this.setupScales()
     this.setupSimulation()
   }
-  
+
   render(data: SwarmPlotPoint[]): void {
     this.renderAxes()
     this.renderThresholdLines()
     this.renderPoints(data)
     this.startSimulation(data)
   }
-  
+
   setupInteractions(callbacks: InteractionCallbacks): void {
     this.svg.selectAll('.point')
       .on('mouseover', callbacks.onHover)
       .on('mouseout', () => callbacks.onHover(null))
       .on('click', callbacks.onClick)
   }
-  
+
   private renderPoints(data: SwarmPlotPoint[]): void {
     const points = this.svg.selectAll('.point')
       .data(data)
@@ -470,7 +491,7 @@ class SwarmPlotRenderer {
       .attr('stroke', '#fff')
       .attr('stroke-width', 1)
   }
-  
+
   private getPointColor(point: SwarmPlotPoint): string {
     switch (point.classification) {
       case 'STP': return '#22c55e'
@@ -489,11 +510,11 @@ class SwarmPlotRenderer {
 const TreeVisualizationPopup = () => {
   const { selectedClaim, isTreePopupOpen, closeTreePopup } = useApplicationStore()
   const { currentPrediction } = useVisualizationStore()
-  
+
   if (!isTreePopupOpen || !selectedClaim || !currentPrediction) {
     return null
   }
-  
+
   return (
     <Dialog open={isTreePopupOpen} onOpenChange={closeTreePopup}>
       <DialogContent className="max-w-[95vw] max-h-[95vh] p-0">
@@ -509,20 +530,20 @@ const TreeVisualizationPopup = () => {
 const TreeVisualizationCanvas = ({ prediction }: { prediction: FIGSPrediction }) => {
   const canvasRef = useRef<HTMLDivElement>(null)
   const { animationState, startTreeAnimation } = useVisualizationStore()
-  
+
   useEffect(() => {
     if (!canvasRef.current) return
-    
+
     const canvas = new TreeCanvas(canvasRef.current)
     canvas.renderTrees(prediction.treeTraversals)
-    
+
     return () => canvas.cleanup()
   }, [prediction])
-  
+
   return (
     <div className="flex-1 overflow-auto p-4">
       <div ref={canvasRef} className="min-h-full" />
-      <TreeAnimationControls 
+      <TreeAnimationControls
         onPlay={() => startTreeAnimation(prediction)}
         isPlaying={animationState.isPlaying}
       />
@@ -536,12 +557,12 @@ class TreeCanvas {
   private container: HTMLElement
   private trees: TreeVisualization[]
   private animationQueue: AnimationStep[]
-  
+
   constructor(container: HTMLElement) {
     this.container = container
     this.trees = []
   }
-  
+
   renderTrees(traversals: TreeTraversal[]): void {
     traversals.forEach((traversal, index) => {
       const treeContainer = this.createTreeContainer(index)
@@ -549,14 +570,14 @@ class TreeCanvas {
       this.trees.push(treeViz)
     })
   }
-  
+
   animateTraversal(traversals: TreeTraversal[]): Promise<void> {
     return new Promise((resolve) => {
       const animator = new TreeAnimator(this.trees)
       animator.animateSequentially(traversals, resolve)
     })
   }
-  
+
   private createTreeContainer(index: number): HTMLElement {
     const container = document.createElement('div')
     container.className = 'tree-container mb-8'
@@ -577,7 +598,7 @@ class TreeVisualization {
   private svg: d3.Selection<SVGSVGElement, unknown, null, undefined>
   private traversal: TreeTraversal
   private nodePositions: Map<string, [number, number]>
-  
+
   constructor(container: HTMLElement, traversal: TreeTraversal) {
     this.traversal = traversal
     this.svg = d3.select(container)
@@ -585,17 +606,17 @@ class TreeVisualization {
       .append('svg')
       .attr('width', '100%')
       .attr('height', 400)
-    
+
     this.calculateLayout()
     this.renderTree()
   }
-  
+
   renderTree(): void {
     this.renderNodes()
     this.renderEdges()
     this.renderLabels()
   }
-  
+
   animateTraversal(): Promise<void> {
     return new Promise((resolve) => {
       this.traversal.path.forEach((step, index) => {
@@ -610,7 +631,7 @@ class TreeVisualization {
       })
     })
   }
-  
+
   private renderNodes(): void {
     const nodes = this.svg.selectAll('.node')
       .data(this.getNodesFromTraversal())
@@ -618,7 +639,7 @@ class TreeVisualization {
       .append('g')
       .attr('class', 'node')
       .attr('transform', (d) => `translate(${this.nodePositions.get(d.id)})`)
-    
+
     nodes.append('rect')
       .attr('width', 120)
       .attr('height', 60)
@@ -626,7 +647,7 @@ class TreeVisualization {
       .attr('fill', (d) => d.type === 'leaf' ? '#dbeafe' : '#f3f4f6')
       .attr('stroke', '#9ca3af')
   }
-  
+
   private highlightNode(nodeId: string): void {
     this.svg.select(`.node[data-id="${nodeId}"]`)
       .select('rect')
@@ -648,56 +669,59 @@ class TreeAnimator {
   private trees: TreeVisualization[]
   private animationQueue: AnimationStep[]
   private currentStep: number = 0
-  
+
   constructor(trees: TreeVisualization[]) {
     this.trees = trees
   }
-  
-  animateSequentially(traversals: TreeTraversal[], onComplete: () => void): void {
+
+  animateSequentially(
+    traversals: TreeTraversal[],
+    onComplete: () => void
+  ): void {
     this.buildAnimationQueue(traversals)
     this.executeAnimationQueue(onComplete)
   }
-  
+
   private buildAnimationQueue(traversals: TreeTraversal[]): void {
     this.animationQueue = []
-    
+
     traversals.forEach((traversal, treeIndex) => {
       traversal.path.forEach((step, stepIndex) => {
         this.animationQueue.push({
           type: 'highlight_node',
           treeIndex,
           nodeId: step.nodeId,
-          duration: 500
+          duration: 500,
         })
-        
+
         this.animationQueue.push({
           type: 'show_comparison',
           treeIndex,
           step,
-          duration: 800
+          duration: 800,
         })
       })
-      
+
       this.animationQueue.push({
         type: 'highlight_path',
         treeIndex,
         path: traversal.path,
-        duration: 1000
+        duration: 1000,
       })
     })
-    
+
     this.animationQueue.push({
       type: 'show_final_calculation',
-      duration: 1500
+      duration: 1500,
     })
   }
-  
+
   private executeAnimationQueue(onComplete: () => void): void {
     if (this.currentStep >= this.animationQueue.length) {
       onComplete()
       return
     }
-    
+
     const step = this.animationQueue[this.currentStep]
     this.executeAnimationStep(step, () => {
       this.currentStep++
@@ -708,7 +732,11 @@ class TreeAnimator {
 
 // lib/animators/AnimationStep.ts
 interface AnimationStep {
-  type: 'highlight_node' | 'show_comparison' | 'highlight_path' | 'show_final_calculation'
+  type:
+    | 'highlight_node'
+    | 'show_comparison'
+    | 'highlight_path'
+    | 'show_final_calculation'
   treeIndex?: number
   nodeId?: string
   step?: TreeTraversalStep
@@ -727,8 +755,8 @@ interface AnimationStep {
 // utils/dataProcessing.ts
 export class DataProcessor {
   static async processLargeDataset(
-    data: any[], 
-    chunkSize: number, 
+    data: any[],
+    chunkSize: number,
     processor: (chunk: any[]) => Promise<any[]>
   ): Promise<any[]> {
     const results = []
@@ -739,17 +767,20 @@ export class DataProcessor {
     }
     return results
   }
-  
+
   static generateSwarmPlotPositions(
-    data: ClaimRecord[], 
-    width: number, 
+    data: ClaimRecord[],
+    width: number,
     height: number
   ): SwarmPlotPoint[] {
     // Implement beeswarm algorithm
     // Return positioned points with x,y coordinates
   }
-  
-  static detectOutliers(data: number[]): { outliers: number[], threshold: number } {
+
+  static detectOutliers(data: number[]): {
+    outliers: number[]
+    threshold: number
+  } {
     // Implement IQR or statistical outlier detection
   }
 }
@@ -764,7 +795,7 @@ export class PerformanceOptimizer {
   ): VirtualizedList {
     // Implement virtual scrolling for large datasets
   }
-  
+
   static debounce<T extends (...args: any[]) => any>(
     func: T,
     delay: number
@@ -775,7 +806,7 @@ export class PerformanceOptimizer {
       timeoutId = setTimeout(() => func.apply(null, args), delay)
     }
   }
-  
+
   static throttle<T extends (...args: any[]) => any>(
     func: T,
     limit: number
@@ -785,7 +816,7 @@ export class PerformanceOptimizer {
       if (!inThrottle) {
         func.apply(null, args)
         inThrottle = true
-        setTimeout(() => inThrottle = false, limit)
+        setTimeout(() => (inThrottle = false), limit)
       }
     }
   }
@@ -801,11 +832,12 @@ export class VisualizationHelpers {
     domain: [number, number],
     colors: string[]
   ): d3.ScaleSequential<string> {
-    return d3.scaleSequential()
+    return d3
+      .scaleSequential()
       .domain(domain)
       .interpolator(d3.interpolateRgbBasis(colors))
   }
-  
+
   static calculateOptimalLayout(
     containerWidth: number,
     containerHeight: number,
@@ -813,14 +845,14 @@ export class VisualizationHelpers {
   ): LayoutDimensions {
     // Calculate optimal spacing and sizing
   }
-  
+
   static generateTooltipContent(
     point: SwarmPlotPoint,
     template: TooltipTemplate
   ): string {
     // Generate HTML content for tooltips
   }
-  
+
   static exportVisualizationAsPNG(
     svgElement: SVGSVGElement,
     filename: string,
@@ -835,15 +867,15 @@ export class MathHelpers {
   static sigmoid(x: number): number {
     return 1 / (1 + Math.exp(-x))
   }
-  
+
   static clamp(value: number, min: number, max: number): number {
     return Math.min(Math.max(value, min), max)
   }
-  
+
   static interpolate(start: number, end: number, progress: number): number {
     return start + (end - start) * progress
   }
-  
+
   static generateJitter(baseY: number, spread: number): number {
     return baseY + (Math.random() - 0.5) * spread
   }
@@ -861,21 +893,21 @@ class ErrorBoundary extends React.Component<ErrorBoundaryProps, ErrorBoundarySta
     super(props)
     this.state = { hasError: false, error: null }
   }
-  
+
   static getDerivedStateFromError(error: Error): ErrorBoundaryState {
     return { hasError: true, error }
   }
-  
+
   componentDidCatch(error: Error, errorInfo: React.ErrorInfo) {
     console.error('Application Error:', error, errorInfo)
     // Send error to logging service
   }
-  
+
   render() {
     if (this.state.hasError) {
       return <ErrorFallbackComponent error={this.state.error} />
     }
-    
+
     return this.props.children
   }
 }
@@ -885,17 +917,17 @@ class ValidationEngine {
   static validateCSVStructure(file: File): Promise<ValidationResult> {
     // Validate file format, size, structure
   }
-  
+
   static validateDataSchema(schema: any): ValidationResult {
     // Validate JSON schema format and content
   }
-  
+
   static validateTreeStructure(trees: any[]): ValidationResult {
     // Validate tree format and completeness
   }
-  
+
   static validateFeatureConsistency(
-    trees: FIGSTree[], 
+    trees: FIGSTree[],
     schema: DataSchema
   ): ValidationResult {
     // Ensure all tree features exist in schema
@@ -907,11 +939,11 @@ class ErrorReporter {
   static reportError(error: Error, context: ErrorContext): void {
     // Log error with context information
   }
-  
+
   static reportPerformanceIssue(metric: PerformanceMetric): void {
     // Log performance issues
   }
-  
+
   static reportUserAction(action: UserAction): void {
     // Log user interactions for debugging
   }
@@ -928,15 +960,15 @@ export class TestHelpers {
   static generateMockClaimData(count: number): ClaimRecord[] {
     // Generate realistic test data
   }
-  
+
   static generateMockTreeStructure(): FIGSTree[] {
     // Generate test tree structure
   }
-  
+
   static createMockFileUpload(content: string, filename: string): File {
     // Create mock file objects for testing
   }
-  
+
   static waitForAnimation(duration: number): Promise<void> {
     // Helper for testing animations
   }
@@ -947,11 +979,11 @@ describe('SwarmPlotVisualization', () => {
   it('should render points correctly', () => {
     // Test point rendering
   })
-  
+
   it('should handle hover interactions', () => {
     // Test hover behavior
   })
-  
+
   it('should handle large datasets', () => {
     // Test performance with large data
   })
@@ -962,7 +994,7 @@ describe('FIGSEngine', () => {
   it('should calculate predictions correctly', () => {
     // Test calculation accuracy
   })
-  
+
   it('should handle missing data', () => {
     // Test edge cases
   })
@@ -979,19 +1011,19 @@ export const usePerformanceOptimization = (dataSize: number) => {
   const shouldUseVirtualization = dataSize > 10000
   const shouldUseWebWorker = dataSize > 50000
   const chunkSize = Math.min(1000, Math.floor(dataSize / 10))
-  
+
   return {
     shouldUseVirtualization,
     shouldUseWebWorker,
     chunkSize,
-    renderingStrategy: dataSize > 100000 ? 'canvas' : 'svg'
+    renderingStrategy: dataSize > 100000 ? 'canvas' : 'svg',
   }
 }
 
 // workers/dataProcessingWorker.ts
-self.onmessage = function(e) {
+self.onmessage = function (e) {
   const { data, operation } = e.data
-  
+
   switch (operation) {
     case 'processLargeDataset':
       const result = processDatasetChunk(data)
@@ -1014,29 +1046,29 @@ self.onmessage = function(e) {
 class ConfigManager {
   private static instance: ConfigManager
   private config: ApplicationConfig
-  
+
   static getInstance(): ConfigManager {
     if (!ConfigManager.instance) {
       ConfigManager.instance = new ConfigManager()
     }
     return ConfigManager.instance
   }
-  
+
   loadConfiguration(config: Partial<ApplicationConfig>): void {
     this.config = { ...this.getDefaultConfig(), ...config }
   }
-  
+
   get<T extends keyof ApplicationConfig>(key: T): ApplicationConfig[T] {
     return this.config[key]
   }
-  
+
   private getDefaultConfig(): ApplicationConfig {
     return {
       scoreThresholds: { low: 0.3, high: 0.7 },
       animationSpeed: 1.0,
       maxDataPoints: 500000,
       virtualizedThreshold: 10000,
-      exportFormats: ['png', 'pdf', 'csv']
+      exportFormats: ['png', 'pdf', 'csv'],
     }
   }
 }
@@ -1046,18 +1078,18 @@ export const DEFAULT_CONFIG: ApplicationConfig = {
   ui: {
     theme: 'light',
     compactMode: false,
-    showAdvancedControls: false
+    showAdvancedControls: false,
   },
   visualization: {
     pointSize: 4,
     animationDuration: 2000,
-    colorScheme: 'default'
+    colorScheme: 'default',
   },
   performance: {
     enableVirtualization: true,
     enableWebWorkers: true,
-    maxRenderPoints: 10000
-  }
+    maxRenderPoints: 10000,
+  },
 }
 ```
 
