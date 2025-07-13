@@ -10,18 +10,16 @@ import { Button } from '@/components/ui/button'
 
 export default function HomePage() {
   return (
-    <div className='min-h-screen bg-background'>
+    <div className='min-h-screen bg-background pt-8'>
       <div className='container mx-auto px-4 py-6'>
         <div className='max-w-4xl mx-auto text-center'>
           <div className='mb-8'>
-            <h1 className='text-4xl font-bold text-foreground mb-4'>
-              FIGS Claims Interpreter
-            </h1>
-            <p className='text-xl text-muted-foreground mb-2'>
-              Interactive Anomaly Score Analysis Tool
-            </p>
+            <h2 className='text-2xl font-bold text-foreground mb-4'>
+              Welcome to the FIGS Claims Interpreter
+            </h2>
             <p className='text-lg text-muted-foreground'>
-              Visualize and understand FIGS model predictions for claims data
+              Follow the steps below to analyze your claims data with FIGS model
+              interpretability
             </p>
           </div>
 
