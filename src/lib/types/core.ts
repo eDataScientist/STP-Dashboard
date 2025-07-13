@@ -5,6 +5,8 @@
  * used throughout the application for data modeling and type safety.
  */
 
+import { ZoomTransform } from 'd3-zoom'
+
 // =============================================================================
 // CLAIM-RELATED TYPES
 // =============================================================================
@@ -586,4 +588,24 @@ export interface ApplicationState {
   closeTreePopup: () => void
   updateThresholds: (thresholds: ScoreThresholds) => void
   resetApplicationState: () => void
+}
+
+/**
+ * State interface for the visualization store
+ */
+export interface VisualizationState {
+  swarmPlotData: SwarmPlotPoint[]
+  hoveredPoint: SwarmPlotPoint | null
+  swarmPlotDimensions: Dimensions
+  zoomTransform: ZoomTransform | null
+  currentPrediction: FIGSPrediction | null
+  animationProgress: AnimationProgress
+  isAnimating: boolean
+  animationSpeed: number
+  generateSwarmPlotData: (claims: ClaimRecord[]) => void
+  setHoveredPoint: (point: SwarmPlotPoint | null) => void
+  startTreeAnimation: (prediction: FIGSPrediction) => void
+  pauseAnimation: () => void
+  resetAnimation: () => void
+  updateZoom: (transform: ZoomTransform) => void
 }
