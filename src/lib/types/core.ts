@@ -562,3 +562,28 @@ export interface PerformanceConfig {
   enableWebWorkers: boolean
   maxRenderPoints: number
 }
+
+/**
+ * State interface for the application store
+ */
+export interface ApplicationState {
+  claimsData: ClaimRecord[]
+  dataSchema: DataSchema | null
+  treesConfig: FIGSTree[]
+  isDataLoaded: boolean
+  isDataProcessing: boolean
+  selectedClaim: ClaimRecord | null
+  isTreePopupOpen: boolean
+  currentView: 'swarm' | 'tree' | 'upload'
+  swarmPlotConfig: SwarmPlotConfig
+  treeVisualizationConfig: TreeVisualizationConfig
+  animationState: AnimationState
+  scoreThresholds: ScoreThresholds
+  uiPreferences: UIPreferences
+  loadClaimsData: (file: File, schema: DataSchema) => Promise<void>
+  loadTreesConfig: (trees: FIGSTree[]) => void
+  selectClaim: (claim: ClaimRecord) => void
+  closeTreePopup: () => void
+  updateThresholds: (thresholds: ScoreThresholds) => void
+  resetApplicationState: () => void
+}
