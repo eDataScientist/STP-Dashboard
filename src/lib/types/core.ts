@@ -319,6 +319,55 @@ export interface SwarmPlotPoint {
   hovered: boolean
 }
 
+/**
+ * Dimensions for visualization components
+ */
+export interface Dimensions {
+  width: number
+  height: number
+}
+
+/**
+ * Progress state for animations
+ */
+export interface AnimationProgress {
+  currentTree: number
+  currentStep: number
+  totalTrees: number
+  totalSteps: number
+}
+
+/**
+ * State for animation control
+ */
+export interface AnimationState {
+  isAnimating: boolean
+  speed: number
+  paused: boolean
+}
+
+/**
+ * Configuration specific to swarm plot
+ */
+export interface SwarmPlotConfig {
+  pointSize: number
+  jitterAmount: number
+  colors: Record<string, string>
+  thresholdLines: number[]
+  enableVirtualization: boolean
+}
+
+/**
+ * Configuration specific to tree visualization
+ */
+export interface TreeVisualizationConfig {
+  nodeWidth: number
+  nodeHeight: number
+  levelSpacing: number
+  animationDuration: number
+  showNodeValues: boolean
+}
+
 // =============================================================================
 // UTILITY TYPES
 // =============================================================================
