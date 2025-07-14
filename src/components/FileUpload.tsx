@@ -1,6 +1,8 @@
 import React, { useState, useCallback } from 'react'
 import { cn } from '@/lib/utils'
 import { Upload, FileText, CheckCircle, AlertCircle } from 'lucide-react'
+import { Progress } from '@/components/ui/progress'
+import CSVParser from '@/lib/parsers/CSVParser'
 
 interface FileUploadProps {
   onFileSelect: (file: File) => void
@@ -42,12 +44,56 @@ export const FileUpload: React.FC<FileUploadProps> = ({
   }, [])
 
   const handleFileSelection = useCallback(
-    (file: File) => {
+    async (file: File) => {
       setSelectedFile(file)
       setError(null)
-      onFileSelect(file)
+      setUploadState('uploading')
+      setProgress(0)
+
+      try {
+        // Validate file size
+        if (file.size > maxSize) {
+          setError(
+            `File size exceeds maximum limit of ${(maxSize / 1024 / 1024).toFixed(0)}MB`
+          )
+          setUploadState('error')
+          onFileValidated?.(file, false)
+          return
+        }
+
+        // Validate file format
+        const validationResult = await CSVParser.validateFormat(file)
+
+        if (!validationResult.isValid) {
+          const errorMessage = validationResult.errors
+            .map(e => e.message)
+            .join(', ')
+          setError(errorMessage)
+          setUploadState('error')
+          onFileValidated?.(file, false)
+          return
+        }
+
+        // Simulate progress for large files
+        if (file.size > 10 * 1024 * 1024) {
+          // 10MB
+          for (let i = 0; i <= 100; i += 10) {
+            setProgress(i)
+            await new Promise(resolve => setTimeout(resolve, 100))
+          }
+        }
+
+        setUploadState('success')
+        setProgress(100)
+        onFileSelect(file)
+        onFileValidated?.(file, true)
+      } catch (error) {
+        setError(`Failed to process file: ${(error as Error).message}`)
+        setUploadState('error')
+        onFileValidated?.(file, false)
+      }
     },
-    [onFileSelect]
+    [onFileSelect, onFileValidated, maxSize]
   )
 
   const handleDrop = useCallback(
@@ -110,11 +156,18 @@ export const FileUpload: React.FC<FileUploadProps> = ({
           <div className='text-lg font-medium'>
             {uploadState === 'dragActive'
               ? 'Drop file to upload'
-              : 'Drag and drop your CSV file here'}
+              : uploadState === 'uploading'
+                ? 'Processing file...'
+                : 'Drag and drop your CSV file here'}
           </div>
           <div className='text-sm text-muted-foreground'>
-            or click to browse files
+            {uploadState === 'uploading'
+              ? `${progress}% complete`
+              : 'or click to browse files'}
           </div>
+          {uploadState === 'uploading' && (
+            <Progress value={progress} className='w-full max-w-xs' />
+          )}
         </div>
       </div>
 
