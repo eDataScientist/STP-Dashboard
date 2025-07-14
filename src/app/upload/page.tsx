@@ -1,7 +1,6 @@
 'use client'
 
 import { useState } from 'react'
-import { Metadata } from 'next'
 import {
   Card,
   CardContent,
@@ -49,11 +48,6 @@ interface UploadPageState {
   processedStats: ProcessedStats | null
   previewStats: PreviewStats | null
   error: string | null
-}
-
-export const metadata: Metadata = {
-  title: 'Data Upload - FIGS Claims Interpreter',
-  description: 'Upload your claims data CSV file to begin analysis',
 }
 
 export default function UploadPage() {
