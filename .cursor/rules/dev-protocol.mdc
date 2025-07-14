@@ -67,10 +67,12 @@ After completing each task, you MUST verify ALL completion criteria:
 3. Code is written and tested locally
 4. TypeScript compilation passes with no errors  
 5. ESLint and Prettier checks pass
-6. Component renders without console errors
-7. Basic functionality works as specified
-8. All incremental commits successful
-9. Final integration test passed
+6. Development server returns 200 status code
+7. Application loads successfully in browser
+8. Component renders without console errors
+9. Basic functionality works as specified
+10. All incremental commits successful
+11. Final integration test passed with server verification
 
 ALL criteria must be satisfied before marking task complete.
 ```
@@ -91,7 +93,7 @@ EXAMPLE:
 ### RULE 6: COMMIT PROTOCOL (MANDATORY)
 ```
 You MUST commit to version control:
-1. After completing EVERY incremental change (≤50 lines)
+1. After completing EVERY incremental change (≤50 lines) that passes server check
 2. After completing EVERY individual task
 3. After completing each PHASE entirely
 4. Before moving to the next phase
@@ -103,6 +105,7 @@ INCREMENTAL COMMIT MESSAGE FORMAT:
 - Incremental change: [What specific change was made]
 - Lines changed: [Approximate line count]
 - Functionality: [What this increment accomplishes]
+- Server status: 200 OK
 - Status: [Working/Tested/Integrated]"
 
 TASK COMPLETION COMMIT MESSAGE FORMAT:
@@ -112,6 +115,7 @@ TASK COMPLETION COMMIT MESSAGE FORMAT:
 - Phase: [Phase Number]
 - Dependencies verified: [List]
 - All completion criteria met: Yes
+- Server verification: 200 OK
 - Total incremental commits: [Number]
 
 [Additional details if needed]"
@@ -122,6 +126,7 @@ EXAMPLE INCREMENTAL COMMIT:
 - Incremental change: Created SVG container with dimensions
 - Lines changed: 25
 - Functionality: Basic chart rendering foundation
+- Server status: 200 OK
 - Status: Working and tested"
 ```
 
@@ -241,10 +246,19 @@ INCREMENTAL DEVELOPMENT PROCESS:
 1. Make small change (≤50 lines)
 2. Save and test the change immediately
 3. Verify TypeScript compilation passes
-4. Check that existing functionality still works
-5. If successful, commit the change
-6. Then proceed with next small change
-7. If error occurs, fix immediately before continuing
+4. Check development server returns 200 status code
+5. Verify application loads without errors in browser
+6. Check that existing functionality still works
+7. If successful, commit the change
+8. Then proceed with next small change
+9. If error occurs, fix immediately before continuing
+
+SERVER VERIFICATION REQUIREMENT:
+• After EVERY code change, you MUST verify dev server responds with 200
+• Check localhost:3000 (or configured port) is accessible
+• Verify no server errors in terminal
+• Confirm application renders in browser without crashes
+• If server returns 500, 404, or other error codes: STOP and fix immediately
 
 PROHIBITED LARGE CHANGES:
 • Do not create entire components in one edit (>50 lines)
@@ -256,14 +270,14 @@ PROHIBITED LARGE CHANGES:
 EXAMPLE INCREMENTAL APPROACH:
 Instead of: Creating entire SwarmPlot component (200+ lines) in one edit
 Do this: 
-1. Create basic component structure (20 lines) → Test
-2. Add props interface (15 lines) → Test  
-3. Add basic rendering logic (30 lines) → Test
-4. Add interaction handlers (25 lines) → Test
-5. Add styling and polish (40 lines) → Test
+1. Create basic component structure (20 lines) → Test → Check server 200 → Commit
+2. Add props interface (15 lines) → Test → Check server 200 → Commit
+3. Add basic rendering logic (30 lines) → Test → Check server 200 → Commit
+4. Add interaction handlers (25 lines) → Test → Check server 200 → Commit
+5. Add styling and polish (40 lines) → Test → Check server 200 → Commit
 
 COMMIT FREQUENCY:
-• Commit after every successful small change
+• Commit after every successful small change that passes server check
 • Use descriptive commit messages for each increment
 • Build up complex features through small, working steps
 ```
@@ -395,7 +409,10 @@ STEP 2: Task Execution
 □ Break task into small, incremental steps (≤50 lines each)
 □ Make one small change at a time
 □ Test each change immediately after making it
-□ Commit each successful small change
+□ Verify TypeScript compilation passes for each change
+□ Check development server returns 200 status code
+□ Verify application loads in browser without errors
+□ Commit each successful small change that passes all checks
 □ Reference docs/srs.md and docs/blueprint.md as needed for details
 □ Do NOT start any other tasks
 □ If commands fail, try up to 2 alternatives before requesting human help
@@ -405,10 +422,12 @@ STEP 3: Completion Verification
 □ Code written and tested locally
 □ TypeScript compilation passes (no errors)
 □ ESLint and Prettier checks pass
+□ Development server returns 200 status code
+□ Application loads successfully in browser
 □ Component renders without console errors  
 □ Basic functionality works as specified
 □ All incremental commits successful
-□ Final integration test passed
+□ Final integration test passed with server verification
 
 STEP 4: Task Marking and Progress Update
 □ Update Developer Checklist markdown
@@ -487,6 +506,9 @@ If ANY of these occur, STOP ALL WORK immediately:
 10. Pull request not approved by human reviewer
 11. Making changes larger than 50 lines in single edit
 12. Modifying more than 3 files simultaneously without testing
+13. Development server returns non-200 status code (500, 404, etc.)
+14. Application fails to load in browser after code changes
+15. Server crashes or becomes unresponsive after changes
 ```
 
 ### RECOVERY PROTOCOL
@@ -629,13 +651,17 @@ DO NOT:
 • Modify multiple unrelated files simultaneously
 • Create complex components all at once
 • Skip testing incremental changes
+• Proceed when server returns non-200 status codes
+• Commit code without verifying server response
 
 ALWAYS:
 • Read documentation before starting each task
 • Verify dependencies before starting tasks
 • Break tasks into small, incremental steps
 • Test each small change immediately
-• Commit after each successful increment
+• Verify development server returns 200 after each change
+• Check application loads in browser after changes
+• Commit after each successful increment that passes server check
 • Make changes no larger than 50 lines at a time
 • Test functionality after every change
 • Update progress tracking accurately
